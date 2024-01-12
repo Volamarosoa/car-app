@@ -1,0 +1,12 @@
+/* styles.css ou votre fichier CSS */
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+scroll-behavior: smooth;
+}
+
+ion-app {
+scroll-behavior: smooth;
+}
