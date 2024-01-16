@@ -9,39 +9,23 @@ interface MenuProps {
 }
 const Menu: React.FC<MenuProps> = ({ menu, isActive = false }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // const menuRef = useRef<HTMLIonMenuElement | null>(null);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-        // if (menuRef.current) {
-        //     menuRef.current.open();
-        // }
     };
-    
-    // const closeMenu = () => {
-    //     // setIsMenuOpen(true);
-    //     if (menuRef.current) {
-    //         menuRef.current.close();
-    //     }
-      
-    // };
 
   return (
     <>
-        <IonMenu type="overlay" >
-            <IonHeader>
+        <IonMenu type="overlay" contentId="main-content">
+            <IonHeader id="main-content">
                 <IonToolbar>
                     <IonTitle>Menu</IonTitle>
                     <IonButtons slot="end">
                         <IonMenuButton onClick={toggleMenu}/>
-                        {/* <IonButton onClick={closeMenu}>
-                            <IonIcon icon={closeOutline} /> 
-                        </IonButton> */}
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
-            <IonContent className="ion-padding">
-                {/* <h2>Menu</h2> */}
+            <IonContent className="ion-padding" id="main-content">
                 <IonItem href="/tab1">
                     <IonIcon icon={chatbubblesOutline}  className="custom-icon"/>
                     <code>Discussion</code>

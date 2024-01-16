@@ -36,6 +36,7 @@ const Login: React.FC = () => {
         }
         
       } catch (error) {
+        console.log(error);
         setErreur("Email ou mot de passe incorrect")
       }
    } else {
