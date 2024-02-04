@@ -16,7 +16,7 @@ const Menu: React.FC<MenuProps> = ({ menu, isActive = false }) => {
 
   return (
     <>
-        <IonMenu type="overlay" contentId="main-content">
+        <IonMenu type="overlay" color="" contentId="main-content">
             <IonHeader id="main-content">
                 <IonToolbar>
                     <IonTitle>Menu</IonTitle>

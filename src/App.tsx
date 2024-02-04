@@ -17,6 +17,7 @@ import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ListeAnnonce from './pages/annonce/Annonce';
 
 import './App.css';
 
@@ -36,11 +37,14 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
+import 'bootstrap';
 
 /* Theme variables */
 import './theme/variables.css';
 
 import { AuthentificationProvider } from './controller/Authentification'
+import CreateCar from './pages/annonce/CreationVoiture';
+import Footer from './components/Footer';
 
 setupIonicReact();
 
@@ -49,10 +53,10 @@ const App: React.FC = () => {
   // const shouldShowFooter = !location.pathname.startsWith('/login');
 
   return (
-  <AuthentificationProvider>
+  // <AuthentificationProvider>
     <IonApp>
       <IonReactRouter>
-        <AuthentificationProvider>
+        {/* <AuthentificationProvider> */}
           <IonRouterOutlet>
               <Route exact path="/tab1" component={Tab1}/>
               <Route exact path="/tab2">
@@ -60,6 +64,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/tab3">
                 <Tab3 />
+              </Route>
+              <Route exact path="/test/annonce">
+                  <CreateCar />
               </Route>
               <Route exact path="/login">
                 <Login />
@@ -71,10 +78,11 @@ const App: React.FC = () => {
                 <Signup />
               </Route>
             </IonRouterOutlet>
-          </AuthentificationProvider>
+              
+          {/* </AuthentificationProvider> */}
       </IonReactRouter>
     </IonApp>
-  </AuthentificationProvider>
+  // </AuthentificationProvider>
 )};
 
 export default App;

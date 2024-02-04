@@ -7,8 +7,12 @@ import apiRequest from '../service-api/usersService';
 
 
 const Login: React.FC = () => {
- const { login, signInWithGoogle } = useAuth();
+//  const { login, signInWithGoogle } = useAuth();
  const history = useHistory();
+
+ const offlineLog = async ( username:string, password: string ) => {
+    return await apiRequest("POST" , "offline-auth" , {mail: username, password: password});
+ };
 
  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
    event.preventDefault();
@@ -26,14 +30,16 @@ const Login: React.FC = () => {
    // Ajoutez ici la logique de connexion
    if (username.trim() !== '' && password.trim() !== '') {
       try {
-        const user = await login(username, password);
-        if(user) {
-          var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
-          var response = await apiRequest('POST', 'login', requestData);
+        // const user = await login(username, password);
+        // logss( username, password );
+        // if(user) {
+          // var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
+          // var requestData = {mail: username, password: password};
+          var response = await offlineLog(username, password);
           console.log(response);
-          localStorage.setItem('token', response.data.token);
+          sessionStorage.setItem('token', response.data.token);
           onSuccess();
-        }
+        // }
         
       } catch (error) {
         console.log(error);
@@ -50,25 +56,26 @@ const Login: React.FC = () => {
   };
 
   try {
-    const user = await signInWithGoogle();
-    if(user){
-      var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
-      var response = await apiRequest('POST', 'login', requestData);
-      console.log(response);
-      if(response.data != null) {
-        localStorage.setItem('token', response.data.token);
-        onSuccess();
-        return;
-      }
-      response = await apiRequest('POST', 'inscription', requestData);
-      console.log(response);
-      if(response.errors != null) {
-        console.log(response.errors);
-        alert("Erreur: " + response.errors.exception);
-        return;
-      }
-      onSuccess();
-    }
+
+    // const user = await signInWithGoogle();
+    // if(user){
+    //   var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
+    //   var response = await apiRequest('POST', 'login', requestData);
+    //   console.log(response);
+    //   if(response.data != null) {
+    //     localStorage.setItem('token', response.data.token);
+    //     onSuccess();
+    //     return;
+    //   }
+    //   response = await apiRequest('POST', 'inscription', requestData);
+    //   console.log(response);
+    //   if(response.errors != null) {
+    //     console.log(response.errors);
+    //     alert("Erreur: " + response.errors.exception);
+    //     return;
+    //   }
+    //   onSuccess();
+    // }
   } catch (error) {
     alert('Il y a une erreur : '+error);
   }
@@ -88,8 +95,8 @@ const Login: React.FC = () => {
        <IonInput label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Entrer votre email" name="username" required></IonInput>
        <IonInput label="Mot de passe" labelPlacement="floating" fill="outline" type="password" placeholder="Entrer votre mot de passe" name="password" required></IonInput>
        <p id="erreur" className="erreur"></p>
-       <IonButton expand="block" type="submit">Se connecter</IonButton>
-       <IonButton expand="block" onClick={handleGoogleSignUp}>Se connecter avec Google</IonButton>
+       <IonButton expand="block" color="button" type="submit">Se connecter</IonButton>
+       <IonButton expand="block"color="button" onClick={handleGoogleSignUp}>Se connecter avec Google</IonButton>
        <a href="/signup"><p>Inscription</p></a>
      </form>
    </div>
