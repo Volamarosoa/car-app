@@ -25,10 +25,16 @@ const FicheAnnonce: React.FC<FicheProps> = ({ annonce }) => {
   };  
 
   const handleAlertConfirm = async () => {
-    console.log("Zay sa " + status.idAnnonce);
+    const dateHeureEnvoye = new Date(); 
+    const annee = dateHeureEnvoye.getFullYear();
+    const mois = ('0' + (dateHeureEnvoye.getMonth() + 1)).slice(-2); 
+    const jour = ('0' + dateHeureEnvoye.getDate()).slice(-2);
+    const date = `${annee}-${mois}-${jour}`;
+    var requestData = {date: date};
+    console.log("Zay sa " + status.idAnnonce + " et h: " + date);
     console.log(status.idAnnonce + ' : La valeur sélectionnée est :' + status.selectedValue);
     try {
-      const response = await annonceService('PUT', 'vendu/'+status.idAnnonce, null);
+      const response = await annonceService('PUT', 'vendu/'+status.idAnnonce, requestData);
       console.log(response.data);
     } catch(error) {
       console.log(error);
@@ -104,7 +110,7 @@ const FicheAnnonce: React.FC<FicheProps> = ({ annonce }) => {
         <IonCardTitle>{getStatus()}</IonCardTitle>
         <IonCardSubtitle>
             <span>
-                { (status.selectedValue == 20) ? <IonIcon className="parametre" icon={settingsOutline} size="large" onClick={() => handleSettingsClick("AN0001", status.selectedValue)} /> : null} 
+                { (status.selectedValue == 20) ? <IonIcon className="parametre" icon={settingsOutline} size="large" onClick={() => handleSettingsClick(annonce.id, status.selectedValue)} /> : null} 
                 { formatDate(annonce.date) }
             </span>
         </IonCardSubtitle>

@@ -17,6 +17,7 @@ const ListeAnnonce: React.FC = () => {
       try {
         const response = await annonceService('GET', 'byUser', null);
         if (response.data) {
+          console.log(response.data);
           setListe(response.data);
         }
       } catch (error) {
