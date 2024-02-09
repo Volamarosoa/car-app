@@ -4,14 +4,15 @@ import './Tab1.css';
 import  Menu from '../components/Menu';
 import  Footer from '../components/Footer';
 import apiRequest from '../service-api/usersService';
+import annonceRequest from '../service-api/annonceService';
 
 const checkToken = async () => {
-  var token = localStorage.getItem('token');
+  var token = sessionStorage.getItem('token');
   const dateHeureEnvoye = new Date(); 
   console.log(token + " : " + dateHeureEnvoye);
-  var requestData = {idEnvoyeur: token, idReceveur: "aRU7yww5lgZ6eDev3iJ95SKgmAA3", message: "Coucou!!!"};
-  var response = await apiRequest('POST', 'messagerie', requestData);
-  // var response = await apiRequest('GET', 'token/'+token, null);
+  // var requestData = {idEnvoyeur: token, idReceveur: "aRU7yww5lgZ6eDev3iJ95SKgmAA3", message: "Coucou!!!"};
+  var response = await annonceRequest('GET', 'byUser', null);
+  // var response = await apiRequest('POST', 'listeDiscussions', null);
   console.log(response);
 }
 

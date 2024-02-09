@@ -3,18 +3,37 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import  Menu from '../components/Menu';
 import  Footer from '../components/Footer';
+import FicheAnnonce from '../components/Annonce/FicheAnnonce';
+import annonceService from '../service-api/annonceService';
+import { useEffect, useState } from 'react';
 
 const Tab3: React.FC = () => {
+  
+  const[liste, setListe] = useState([]);  
+  useEffect( () =>{
+    var response = annonceService('GET', 'byUser', null);
+    // console.log("121212121");
+    // console.log(response);
+    response.then( responses => {
+      if(responses.data){
+        // console.log(response;
+        setListe(responses.data);
+      }
+    } );
+  }, [] );
+
   return (
     <IonPage>
-      <Menu menu="Stories" isActive={true} />
+      <Menu menu="Listes des Annonces" isActive={true} />
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 3 page" />
+        {
+          (liste.length > 0 ) && liste.map((_annonce) => { 
+            console.log(_annonce);
+            return(
+              <FicheAnnonce annonce={_annonce} />
+            )  
+          })
+        }
       </IonContent>
       <Footer />
     </IonPage>

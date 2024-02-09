@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const apiUrl = `${import.meta.env.VITE_REACT_APP_API_URL}/users`; // Remplacez par l'URL de votre API
+const apiUrl = `${import.meta.env.VITE_REACT_APP_API_URL}/annonces`; // Remplacez par l'URL de votre API
 
-const usersService = async (method : string, endpoint : string, data : null | object) => {
+const annonceService = async (method : string, endpoint : string, data : null | object) => {
   try {
     console.log(data);
     const response = await axios({
@@ -15,10 +15,10 @@ const usersService = async (method : string, endpoint : string, data : null | ob
       },
     });
 
-    return response.data;
+    return response;
   } catch (error) {
     throw error;
   }
 };
 
-export default usersService;
+export default annonceService;

@@ -1,0 +1,119 @@
+.image-scroll-card {
+    position: relative;
+    overflow-x: hidden; /* Pour cacher la barre de défilement horizontale */
+  }
+  
+  .image-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; 
+  }
+  
+  .image-container img {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    width: 100%;
+    height: 200px;
+  }
+
+/* Effet de survol sur les flèches */
+.prev-arrow:hover,
+.next-arrow:hover {
+  color: #ffca22; /* Changer la couleur de la flèche au survol */
+  transition: color 0.3s ease; /* Ajouter une transition fluide */
+}
+
+/* Contour autour des flèches */
+.prev-arrow,
+.next-arrow {
+    font-size: 48px; 
+    position: absolute;
+    top: 28%;
+    transform: translateY(-50%);
+    z-index: 2; 
+    box-shadow: 0 0 5px rgb(255, 255, 255); /* Ajout de l'ombre pour le contour */
+}
+
+.prev-arrow {
+  left: 10px; /* Ajustez la position du fleche */
+}
+
+.next-arrow {
+  right: 10px; /* Ajustez la position du fleche */
+}
+  
+.hidden {
+    display: none; 
+}
+
+.consulter {
+    width: 40%;
+    height: 40%;
+    margin: 0% 10% 2% 50%;
+}
+
+.blur-background {
+    filter: blur(5px); /* Ajouter un flou de 5 pixels au background */
+}
+  
+
+/* Modal */
+.details {
+    width: 80%; 
+    height: 60%; 
+    margin: 30% 10% 10% 10%; 
+    border-radius: 10px; 
+    /* background-color: white;  */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ajouter une ombre pour le modal */
+}
+  
+/* Styles pour le contenu du modal */
+.details ion-content {
+    padding: 20px; 
+    overflow-y: auto; 
+}
+  
+.details table td, .details table th {
+    padding: 8px; /* Ajouter un peu de rembourrage */
+    border-bottom: 1px solid #ddd; /* Ajouter une bordure en bas */
+}
+  
+  /* Styles pour l'icône de fermeture du modal */
+  .details ion-icon[slot="end"] {
+    font-size: 24px; /* Ajuster la taille de l'icône */
+    color: #333; /* Couleur de l'icône */
+    cursor: pointer; /* Curseur pointeur pour indiquer la possibilité de cliquer */
+  }
+
+  .table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th,
+  table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgb(29, 28, 28);
+    border-right: 1px solid #ddd; /* Ajoutez une bordure droite pour chaque cellule */
+  }
+  
+  table td:last-child {
+    text-align: center;
+  }
+  
+  .parametre {
+    color: gray !important;
+    margin-left: 90%;
+  }
+
+  .parametre:hover {
+    color: #ffca22
+  }
+
+  
