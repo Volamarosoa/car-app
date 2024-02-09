@@ -1,9 +1,14 @@
 import React from 'react';
 import Annonce from '../../components/Annonce/Annonce'
+import { IonContent, IonPage } from '@ionic/react';
 const ListeAnnonce = () => {
 
 	return(
-		<Annonce />
+		<IonPage>
+			<IonContent>
+				<Annonce />
+			</IonContent>
+		</IonPage>
 	)
 
 };

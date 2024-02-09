@@ -1,12 +1,12 @@
 import React from 'react';
-import { useAuth } from "../controller/Authentification";
+// import { useAuth } from "../controller/Authentification";
 import './Signup.css';
 import { IonButton, IonContent, IonInput } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import apiRequest from '../service-api/usersService';
 
 const Signup: React.FC = () => {
- const { signup, signInWithGoogle } = useAuth();
+//  const { signup, signInWithGoogle } = useAuth();
  const history = useHistory();
 
  const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -45,22 +45,23 @@ const Signup: React.FC = () => {
                 return;
               }
 
-              const response = await apiRequest('GET', 'inscription_valide/' + date_naissance, null);
+              let response = await apiRequest('GET', 'inscription_valide/' + date_naissance, null);
               if(response.errors != null) {
                 setErreur(response.errors.exception);
                 return;
               }
 
-              const user = await signup(email, password);
-              if(user){
-                const requestData = {id: user.uid, nom: nom, prenom: prenom, dateDeNaissance: date_naissance, contact: contact, mail: email, password: password};
-                const response = await apiRequest('POST', 'inscription', requestData);
+              // const user = await signup(email, password);
+              // const user = undefined;
+              // if(user){
+                const requestData = {nom: nom, prenom: prenom, dateDeNaissance: date_naissance, contact: contact, mail: email, password: password};
+                response = await apiRequest('POST', 'inscription', requestData);
                 if(response.errors != null) {
                   setErreur(response.errors.exception);
                   return;
                 }
                 onSuccess();
-              }
+              // }
 
             } catch (error) {
                 setErreur("Ce compte existe deja!");
@@ -78,7 +79,8 @@ const Signup: React.FC = () => {
     };
 
     try {
-      const user = await signInWithGoogle();
+      // const user = await signInWithGoogle();
+      const user = undefined;
       if(user){
         var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
         var response = await apiRequest('POST', 'login', requestData);

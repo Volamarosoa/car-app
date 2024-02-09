@@ -65,8 +65,11 @@ const App: React.FC = () => {
               <Route path="/tab3">
                 <Tab3 />
               </Route>
-              <Route exact path="/test/annonce">
-                  <CreateCar />
+              <Route path="/test/voiture">
+                <CreateCar />
+              </Route>
+              <Route path="/test/annonce">
+                <ListeAnnonce />
               </Route>
               <Route exact path="/login">
                 <Login />
