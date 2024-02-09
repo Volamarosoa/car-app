@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.example.carws.firebase;
 
 import com.getcapacitor.BridgeActivity;
 

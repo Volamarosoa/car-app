@@ -45,6 +45,7 @@ import './theme/variables.css';
 import { AuthentificationProvider } from './controller/Authentification'
 import CreateCar from './pages/annonce/CreationVoiture';
 import Footer from './components/Footer';
+import PushNotificationsContainer from './pages/TestNotification';
 
 setupIonicReact();
 
@@ -75,10 +76,14 @@ const App: React.FC = () => {
                 <Login />
               </Route>
               <Route exact path="/">
-                <Redirect to="/login" />
+                {/* <Redirect to="/login" /> */}
+                <Redirect to="/test/notif" />
               </Route>
               <Route exact path="/signup">
                 <Signup />
+              </Route>
+              <Route exact path="/test/notif" >
+                <PushNotificationsContainer />
               </Route>
             </IonRouterOutlet>
               
