@@ -14,10 +14,10 @@ import { IonReactRouter } from '@ionic/react-router';
 import { chatbubblesOutline, peopleOutline, newspaperOutline } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import ListeAnnonce from './pages/ListeAnnonce';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import ListeAnnonce from './pages/annonce/Annonce';
+import Annonce from './pages/annonce/Annonce';
 
 import './App.css';
 
@@ -63,14 +63,14 @@ const App: React.FC = () => {
               <Route exact path="/tab2">
                 <Tab2 />
               </Route>
-              <Route path="/tab3">
-                <Tab3 />
+              <Route path="/listeAnnonce">
+                <ListeAnnonce />
               </Route>
               <Route path="/test/voiture">
                 <CreateCar />
               </Route>
               <Route path="/test/annonce">
-                <ListeAnnonce />
+                <Annonce />
               </Route>
               <Route exact path="/login">
                 <Login />

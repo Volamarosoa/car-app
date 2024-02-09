@@ -14,9 +14,9 @@ const Footer: React.FC = () => (
         <IonIcon aria-hidden="true" icon={peopleOutline} />
         <IonLabel>Groupe</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab3" href="/tab3">
+        <IonTabButton tab="listeAnnonce" href="/listeAnnonce">
             <IonIcon aria-hidden="true" icon={newspaperOutline} />
-            <IonLabel>Stories</IonLabel>
+            <IonLabel>Liste Annonces</IonLabel>
         </IonTabButton>
         <IonTabButton tab='tab4' href='/test/voiture'>
             <IonIcon aria-hidden="true" icon={newspaperOutline} />
