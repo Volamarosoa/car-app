@@ -3,6 +3,8 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, 
 import { IonIcon, IonAlert, IonText } from '@ionic/react';
 import { chevronBackOutline, chevronForwardOutline, closeCircleOutline, settingsOutline } from 'ionicons/icons';
 import './FicheAnnonce.css'; 
+import annonceService from '../../service-api/annonceService';
+import { async } from '@firebase/util';
 
 
 interface FicheProps {
@@ -22,9 +24,15 @@ const FicheAnnonce: React.FC<FicheProps> = ({ annonce }) => {
     setAlertStatus({ ...status, selectedValue: value });
   };  
 
-  const handleAlertConfirm = () => {
+  const handleAlertConfirm = async () => {
     console.log("Zay sa " + status.idAnnonce);
     console.log(status.idAnnonce + ' : La valeur sélectionnée est :' + status.selectedValue);
+    try {
+      const response = await annonceService('PUT', 'vendu/'+status.idAnnonce, null);
+      console.log(response.data);
+    } catch(error) {
+      console.log(error);
+    }
   };
 
   const handleAlertCancel = () => {

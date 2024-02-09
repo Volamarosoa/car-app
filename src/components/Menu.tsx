@@ -16,41 +16,8 @@ const Menu: React.FC<MenuProps> = ({ menu, isActive = false }) => {
 
   return (
     <>
-        <IonMenu type="overlay" color="" contentId="main-content">
-            <IonHeader id="main-content">
-                <IonToolbar>
-                    <IonTitle>Menu</IonTitle>
-                    <IonButtons slot="end">
-                        <IonMenuButton onClick={toggleMenu}/>
-                    </IonButtons>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent className="ion-padding" id="main-content">
-                <IonItem href="/tab1">
-                    <IonIcon icon={chatbubblesOutline}  className="custom-icon"/>
-                    <code>Discussion</code>
-                </IonItem>
-                <IonItem href="/tab2">
-                    <IonIcon icon={peopleOutline}  className="custom-icon"/>
-                    <code>Groupe</code>
-                </IonItem>
-                <IonItem href="/tab3">
-                    <IonIcon icon={newspaperOutline}  className="custom-icon" />
-                    <code>Stories</code>
-                </IonItem>
-            </IonContent>
-            <IonButton expand="full" color="danger" href="/login">
-                <IonIcon icon={logOutOutline} />
-                <IonTitle>Déconnexion</IonTitle>
-            </IonButton>
-        </IonMenu>
         <IonHeader id="main-content">
             <IonToolbar>
-            {isActive ? (
-                <IonButtons slot="start">
-                    <IonMenuButton onClick={toggleMenu}/>
-                </IonButtons>
-            ) : null}
                 <IonTitle>{ menu }</IonTitle>
             </IonToolbar>
         </IonHeader>

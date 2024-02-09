@@ -7,7 +7,7 @@ import apiRequest from '../service-api/usersService';
 
 
 const Login: React.FC = () => {
-//  const { login, signInWithGoogle } = useAuth();
+ const { signInWithGoogle } = useAuth();
  const history = useHistory();
 
  const offlineLog = async ( username:string, password: string ) => {
@@ -30,17 +30,10 @@ const Login: React.FC = () => {
    // Ajoutez ici la logique de connexion
    if (username.trim() !== '' && password.trim() !== '') {
       try {
-        // const user = await login(username, password);
-        // logss( username, password );
-        // if(user) {
-          // var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
-          // var requestData = {mail: username, password: password};
           var response = await offlineLog(username, password);
           console.log(response);
           sessionStorage.setItem('token', response.data.token);
-          onSuccess();
-        // }
-        
+          onSuccess();        
       } catch (error) {
         console.log(error);
         setErreur("Email ou mot de passe incorrect")
@@ -52,7 +45,7 @@ const Login: React.FC = () => {
 
  const handleGoogleSignUp = async () => {
   const onSuccess = () => {
-    history.push('/tab1');
+    history.push('/listeAnnonce');
   };
 
   try {
@@ -62,22 +55,18 @@ const Login: React.FC = () => {
       var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
       var response = await apiRequest('POST', 'login', requestData);
       console.log(response);
-      if(response.data != null) {
-        localStorage.setItem('token', response.data.token);
+      if(response.data != null && response.data != "User not found in annonceService") {
+        sessionStorage.setItem('token', response.data.token);
         onSuccess();
         return;
-      }
-      response = await apiRequest('POST', 'inscription', requestData);
-      console.log(response);
-      if(response.errors != null) {
-        console.log(response.errors);
-        alert("Erreur: " + response.errors.exception);
-        return;
-      }
-      onSuccess();
+      } 
     }
   } catch (error) {
-    alert('Il y a une erreur : '+error);
+    if (error.response && error.response.status === 400) {
+      alert(error.response.data.errors.exception);
+    } else {
+      alert(error.message);
+    }
   }
 };
 
@@ -92,8 +81,8 @@ const Login: React.FC = () => {
    <div className="login-container">
      <h1>Connexion</h1>
      <form method="Get" onSubmit={handleLogin}>
-       <IonInput label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Entrer votre email" name="username" required></IonInput>
-       <IonInput label="Mot de passe" labelPlacement="floating" fill="outline" type="password" placeholder="Entrer votre mot de passe" name="password" required></IonInput>
+       <IonInput label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Entrer votre email" name="username" value="jean@gmail.com" required></IonInput>
+       <IonInput label="Mot de passe" labelPlacement="floating" fill="outline" type="password" placeholder="Entrer votre mot de passe" name="password" value="jean0!!!" required></IonInput>
        <p id="erreur" className="erreur"></p>
        <IonButton expand="block" color="button" type="submit">Se connecter</IonButton>
        <IonButton expand="block"color="button" onClick={handleGoogleSignUp}>Se connecter avec Google</IonButton>

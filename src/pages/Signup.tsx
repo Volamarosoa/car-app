@@ -1,12 +1,12 @@
 import React from 'react';
-// import { useAuth } from "../controller/Authentification";
+import { useAuth } from "../controller/Authentification";
 import './Signup.css';
 import { IonButton, IonContent, IonInput } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import apiRequest from '../service-api/usersService';
 
 const Signup: React.FC = () => {
-//  const { signup, signInWithGoogle } = useAuth();
+ const { signInWithGoogle } = useAuth();
  const history = useHistory();
 
  const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -51,17 +51,13 @@ const Signup: React.FC = () => {
                 return;
               }
 
-              // const user = await signup(email, password);
-              // const user = undefined;
-              // if(user){
-                const requestData = {nom: nom, prenom: prenom, dateDeNaissance: date_naissance, contact: contact, mail: email, password: password};
-                response = await apiRequest('POST', 'inscription', requestData);
-                if(response.errors != null) {
-                  setErreur(response.errors.exception);
-                  return;
-                }
-                onSuccess();
-              // }
+              const requestData = {nom: nom, prenom: prenom, dateDeNaissance: date_naissance, contact: contact, mail: email, password: password};
+              response = await apiRequest('POST', 'inscription', requestData);
+              if(response.errors != null) {
+                setErreur(response.errors.exception);
+                return;
+              }
+              onSuccess();
 
             } catch (error) {
                 setErreur("Ce compte existe deja!");
@@ -78,9 +74,8 @@ const Signup: React.FC = () => {
       history.push('/login');
     };
 
+    const user = await signInWithGoogle();
     try {
-      // const user = await signInWithGoogle();
-      const user = undefined;
       if(user){
         var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
         var response = await apiRequest('POST', 'login', requestData);
@@ -89,17 +84,19 @@ const Signup: React.FC = () => {
           alert("Ce compte existe deja!");
           return;
         }
-        response = await apiRequest('POST', 'inscription', requestData);
+      }
+    } catch (error) {
+      if(user){
+        var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
+        var response = await apiRequest('POST', 'inscription', requestData);
         console.log(response);
         if(response.errors != null) {
           console.log(response.errors);
-          alert("Erreur: " + response.errors.exception);
+          alert(response.errors);
           return;
         }
         onSuccess();
       }
-    } catch (error) {
-      alert('Il y a une erreur : '+error);
     }
  };
 

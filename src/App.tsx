@@ -12,8 +12,6 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { chatbubblesOutline, peopleOutline, newspaperOutline } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
 import ListeAnnonce from './pages/ListeAnnonce';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -54,15 +52,11 @@ const App: React.FC = () => {
   // const shouldShowFooter = !location.pathname.startsWith('/login');
 
   return (
-  // <AuthentificationProvider>
+  <AuthentificationProvider>
     <IonApp>
       <IonReactRouter>
-        {/* <AuthentificationProvider> */}
+        <AuthentificationProvider>
           <IonRouterOutlet>
-              <Route exact path="/tab1" component={Tab1}/>
-              <Route exact path="/tab2">
-                <Tab2 />
-              </Route>
               <Route path="/listeAnnonce">
                 <ListeAnnonce />
               </Route>
@@ -76,8 +70,8 @@ const App: React.FC = () => {
                 <Login />
               </Route>
               <Route exact path="/">
-                {/* <Redirect to="/login" /> */}
-                <Redirect to="/test/notif" />
+                <Redirect to="/login" />
+                {/* <Redirect to="/test/notif" /> */}
               </Route>
               <Route exact path="/signup">
                 <Signup />
@@ -87,10 +81,10 @@ const App: React.FC = () => {
               </Route>
             </IonRouterOutlet>
               
-          {/* </AuthentificationProvider> */}
+          </AuthentificationProvider>
       </IonReactRouter>
     </IonApp>
-  // </AuthentificationProvider>
+  </AuthentificationProvider>
 )};
 
 export default App;

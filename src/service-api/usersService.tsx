@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = `${import.meta.env.VITE_REACT_APP_API_URL}/users`; // Remplacez par l'URL de votre API
+const apiUrl = `${import.meta.env.VITE_REACT_APP_API_URL}/users`; 
 
 const usersService = async (method : string, endpoint : string, data : null | object) => {
   try {
