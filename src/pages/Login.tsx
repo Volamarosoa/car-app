@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useAuth } from "../controller/Authentification";
+import { useAuth } from "../controller/Authentification";
 import './Login.css';
 import { IonButton, IonInput, IonContent } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
    const username = target.username.value;
    const password = target.password.value;
   const onSuccess = () => {
-    history.push('/tab1');
+    history.push('/listeAnnonce');
   };
 
    // Ajoutez ici la logique de connexion
@@ -57,25 +57,25 @@ const Login: React.FC = () => {
 
   try {
 
-    // const user = await signInWithGoogle();
-    // if(user){
-    //   var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
-    //   var response = await apiRequest('POST', 'login', requestData);
-    //   console.log(response);
-    //   if(response.data != null) {
-    //     localStorage.setItem('token', response.data.token);
-    //     onSuccess();
-    //     return;
-    //   }
-    //   response = await apiRequest('POST', 'inscription', requestData);
-    //   console.log(response);
-    //   if(response.errors != null) {
-    //     console.log(response.errors);
-    //     alert("Erreur: " + response.errors.exception);
-    //     return;
-    //   }
-    //   onSuccess();
-    // }
+    const user = await signInWithGoogle();
+    if(user){
+      var requestData = {id: user.uid, mail: user.email, nom: user.displayName};
+      var response = await apiRequest('POST', 'login', requestData);
+      console.log(response);
+      if(response.data != null) {
+        localStorage.setItem('token', response.data.token);
+        onSuccess();
+        return;
+      }
+      response = await apiRequest('POST', 'inscription', requestData);
+      console.log(response);
+      if(response.errors != null) {
+        console.log(response.errors);
+        alert("Erreur: " + response.errors.exception);
+        return;
+      }
+      onSuccess();
+    }
   } catch (error) {
     alert('Il y a une erreur : '+error);
   }
