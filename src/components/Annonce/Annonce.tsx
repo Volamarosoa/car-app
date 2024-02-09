@@ -97,7 +97,8 @@ const Annonce = () => {
 				prix: prix,
 				lieu:lieu,
 				voiture:voiture
-			}
+			},
+			details: details
 		};
 
 		// Okey manantso api rest
@@ -116,8 +117,16 @@ const Annonce = () => {
 	const openDetails = () => {
 		present({
 			onWillDismiss: (ev ) => {
-				
+				console.log(ev)
 			},
+			onDidDismiss: (ev) => {
+				let data = ev.detail.data;
+				let oldData = [...details];
+				let newData = [...details, ...data];
+				setDetails(newData);
+				console.log(newData);
+			}
+			,
 			caracteristiques : {...caracteristiques}
 		  });
 		// setOpen(true);	
@@ -152,9 +161,21 @@ const Annonce = () => {
 							<IonTitle> Photo(s) : </IonTitle>
 							<IonGrid key={1}>
 								<IonRow key={"test"}>
+								{
+										(files.length > 0) && files.map( ( file, index ) => {
+											return(
+												<IonCol size='6'>
+													{/* <IonCardContent> */}
+														<img  src={file.src}/>
+													{/* </IonCardContent> */}
+												</IonCol>
+											)
+										} )
+									}
 									<IonCol>
-										<IonCard>
-											<IonCardContent>
+									
+										{/* <IonCard> */}
+											{/* <IonCardContent> */}
 												<IonButton
 												onClick={() => document.getElementById('fileInput').click()}
 												> 
@@ -168,20 +189,10 @@ const Annonce = () => {
 													onChange={(e) => addPhotos(e)}
 													accept='.jpg,.png'
 													/>
-											</IonCardContent>
-										</IonCard>
+											{/* </IonCardContent> */}
+										{/* </IonCard> */}
 									</IonCol>	
-									{
-										(files.length > 0) && files.map( ( file, index ) => {
-											return(
-												<IonCol>
-													{/* <IonCardContent> */}
-														<img src={file.src}/>
-													{/* </IonCardContent> */}
-												</IonCol>
-											)
-										} )
-									}
+									
 								</IonRow>
 								
 
@@ -198,7 +209,7 @@ const Annonce = () => {
 							{
 								(cars.length > 0) && cars.map( (car, index) => {
 									return(
-										<IonSelectOption value={car.id}> { ( car.modele && car.modele.nom) + " " + (car.categorie && car.categorie.nom) } </IonSelectOption>
+										<IonSelectOption key={index} value={car.id}> { ( car.modele && car.modele.nom) + " " + (car.categorie && car.categorie.nom) } </IonSelectOption>
 									)
 								} )
 							}
